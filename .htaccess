@@ -1,0 +1,26 @@
+#below disables multiviews
+Options -MultiViews
+
+#below disables indexes
+#Options -Indexes
+
+#below turns on the rewrite engine
+RewriteEngine on
+
+#below sets the rewrite base
+RewriteBase /evan
+
+#below sets the rewrite conditions
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+
+#below means if the requested filename is not a directory
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#if the requested filename is not a regular file that exists
+RewriteCond %{REQUEST_FILENAME} !-f
+
+#if the requested filename is not a symbolic link
+RewriteCond %{REQUEST_FILENAME} !-l
+
+#below sets the url var to $_GET['url']. Make sure you have a var in this statement
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
